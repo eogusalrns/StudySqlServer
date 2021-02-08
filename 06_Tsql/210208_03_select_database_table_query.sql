@@ -1,60 +1,60 @@
 use sqlDB;
 go
---ÀÌ¸§ÀÌ ±è°æÈ£ÀÎ »ç¶÷ Á¶È¸
+--ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 select * from userTBL
-where username='±è°æÈ£';
+where username='ï¿½ï¿½ï¿½È£';
 
---1970ÀÌÈÄ Ãâ»ý ÀÌ°í Å°°¡ 182ÀÌ»ó »ç¶÷ÀÇ ¾ÆÀÌµð¿Í ÀÌ¸§¸¸ Á¶È¸
+--1970ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì°ï¿½ Å°ï¿½ï¿½ 182ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 select userID,username 
 from userTBL
 where birthYear>=1970 and height>=182;
 
---1970ÀÌÈÄ Ãâ»ý ÀÌ°Å³ª Å°°¡ 182ÀÌ»ó ÀÎ »ç¶÷ÀÇ ¾ÆÀÌµð¿Í ÀÌ¸§¸¸ Á¶È¸
+--1970ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì°Å³ï¿½ Å°ï¿½ï¿½ 182ï¿½Ì»ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 select userID,username 
 from userTBL
 where birthYear>=1970 or height>=182;
 
---Å°°¡ 180~183»çÀÌÀÎ »ç¶÷¸¸ Á¶È¸
+--Å°ï¿½ï¿½ 180~183ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 select userID,username,height 
 from userTBL
 where height between 180 and 183;
 
---Áö¿ªÀÌ °æ³², Àü³², °æºÏ
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æ³², ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½
 select userID,username,addr 
 from userTBL
-where addr in('°æ³²','Àü³²','°æºÏ');
+where addr in('ï¿½æ³²','ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½');
 
--- ¼ºÀÌ ±è¾¾ÀÎ »ç¶÷ Á¶È¸
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½è¾¾ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 select userId,username
 from userTBL
-where username like '±è%';
+where username like 'ï¿½ï¿½%';
 
--- ÀÌ¸§ÀÌ Á¾½ÅÀÎ »ç¶÷ Á¶È¸
+-- ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 select userId,username
 from userTBL
-where username like '_Á¾½Å';
+where username like '_ï¿½ï¿½ï¿½ï¿½';
 
---¼­ºêÄõ¸®
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 select userId,username,height
 from userTBL
-where height > (select height from userTBL where username='±è°æÈ£');
+where height > (select height from userTBL where username='ï¿½ï¿½ï¿½È£');
 
---¼­ºêÄõ¸® any (or°³³ä)
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ any (orï¿½ï¿½ï¿½ï¿½)
 select userId,username,height,addr
 from userTBL
-where height >= any (select height from userTBL where addr='°æ³²');
+where height >= any (select height from userTBL where addr='ï¿½æ³²');
 
---¼­ºêÄõ¸® all (and°³³ä)
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ all (andï¿½ï¿½ï¿½ï¿½)
 select userId,username,height,addr
 from userTBL
-where height >= all (select height from userTBL where addr='°æ³²');
+where height >= all (select height from userTBL where addr='ï¿½æ³²');
 
---¼­ºêÄõ¸® in
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ in
 select userId,username,height,addr
 from userTBL
-where height in (select height from userTBL where addr='°æ³²');
+where height in (select height from userTBL where addr='ï¿½æ³²');
 
---order by Á¤·Ä ¿À¸§Â÷¼ø
+--order by ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 select userID,username,mDate
   from userTBL
  order by mDate;
@@ -63,7 +63,7 @@ select *
   from userTBL
  order by userID;
 
---distinct : Áßº¹ °ª Á¦°Å
+--distinct : ï¿½ßºï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  select distinct addr
    from userTBL;
 
@@ -71,13 +71,13 @@ select top(5) *
   from userTBL
  order by mDate desc;
 
- --offset ¾Õ¼± °¹¼ö¸¸Å­ ¶Ù¾î³ÑÀº ÈÄ Á¶È¸
+ --offset ï¿½Õ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½Ù¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¸
  select userID,username,birthYear
    from userTBL
   order by birthYear
  offset 4 rows;
 
- --select into : Å×ÀÌºí º¹»ç
+ --select into : ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
  select * into buyTBL2
    from buyTBL;
 
@@ -92,12 +92,12 @@ select userID,amount
   from buyTBL
  order by userID;
 
-select userID,sum(amount) 'ÇÕ°è'
+select userID,sum(amount) 'ï¿½Õ°ï¿½'
   from buyTBL
  group by userID;
 
  --min max
- select userID,username,min(height) 'ÃÖ¼ÒÅ°',max(height) 'ÃÖ´ëÅ°'
+ select userID,username,min(height) 'ï¿½Ö¼ï¿½Å°',max(height) 'ï¿½Ö´ï¿½Å°'
    from userTBL
   group by userID,username;
   
@@ -106,6 +106,10 @@ select userID,username,height
 where height=(select min(height) from userTBL)
    or height=(select max(height) from userTBL);
 
---°¹¼ö
-select count(*) 'È¸¿ø¼ö'from userTBL;
-select count(*) '±¸¸Å³»¿ª¼ö'from buyTBL;
+--ï¿½ï¿½ï¿½ï¿½
+select count(*) 'È¸ï¿½ï¿½ï¿½ï¿½'from userTBL;
+select count(*) 'ï¿½ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½'from buyTBL;
+
+--ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½
+select sum(price*amount) 'ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½Å±Ý¾ï¿½'
+  from buyTBL;

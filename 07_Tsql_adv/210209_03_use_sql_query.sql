@@ -1,16 +1,16 @@
-use sqlDB;
-go
+--use sqlDB;
+--go
 
-select ROW_NUMBER() over(partition by addr order by height desc,username asc) '키큰순위', username,addr,height
-from userTBL;
-
-
-select Rank() over(partition by addr order by height desc) '키큰순위', username,addr,height
-from userTBL;
+--select ROW_NUMBER() over(partition by addr order by height desc,username asc) '키큰순위', username,addr,height
+--from userTBL;
 
 
-select Dense_Rank() over(order by height desc) '키큰순위', username,addr,height
-from userTBL;
+--select Rank() over(partition by addr order by height desc) '키큰순위', username,addr,height
+--from userTBL;
+
+
+--select Dense_Rank() over(order by height desc) '키큰순위', username,addr,height
+--from userTBL;
 
 --pivot
 create table pivotTBL
@@ -34,3 +34,9 @@ select * from pivotTBL
 pivot (sum(amount)
 		for season
 		in ([봄],[여름],[가을],[겨울])) as resultpivot;
+
+--json
+select username,height
+  from userTBL
+ where height >= 180
+   for json auto;

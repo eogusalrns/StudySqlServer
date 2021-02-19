@@ -41,6 +41,28 @@ select b.Idx as '번호'
     on b.Division = d.Division
  where d.names = '로맨스'
 
+--3_1 다르게 푸는 방법1
+select b.Idx as '번호'
+      ,b.Division as '장르번호'
+	  ,d.Names as '장르'
+	  ,b.Names as '책제목'
+	  ,b.Author as '저자'
+  from bookstbl b
+     , divtbl d
+ where b.Division = d.Division
+   and d.names = '로맨스';
+
+--3_1 다르게 푸는 방법2 (subquery)
+select b.Idx as '번호'
+      ,b.Division as '장르번호'
+	  --,d.Names as '장르'
+	  ,(select names from divtbl where Division = b.Division) as 장르
+	  ,b.Names as '책제목'
+	  ,b.Author as '저자'
+  from bookstbl as b
+ --where d.names = '로맨스'
+ where b.Division = 'B002';
+
 --3_2
 select m.Names
       ,m.Levels
@@ -50,6 +72,15 @@ select m.Names
   left outer join rentaltbl as r
     on m.Idx = r.memberIdx
  where r.rentalDate is null;
+
+--3_2 다르게 풀기
+select m.Names
+      ,m.Levels
+	  ,m.Addr
+	  ,null as rentalDate
+	  --,(select r.rentalDate from rentaltbl r where r.memberIdx = m.idx and rentalDate is null)
+  from membertbl m
+ where m.Idx not in (select memberidx from rentaltbl as r);
 
 --4_1
 insert into divtbl
@@ -67,3 +98,13 @@ select d.names, sum(price) as '총합계금액'
  inner join divtbl as d
     on b.Division = d.Division
  group by rollup(d.Names);
+ 
+ --5_1 다르게 풀기
+select (select names from divtbl where division = a.Division) as names
+		,a.sum_price as '총합계금액'
+	from (select Division, sum(price) as sum_price
+			from bookstbl
+			group by Division ) as a
+union all
+select null,sum(price)
+  from bookstbl

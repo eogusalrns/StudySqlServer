@@ -12,10 +12,12 @@ SELECT,DELETE,INSERT,UPDATE
 GRANT,ROLLBACK
 
 ## XML
-
+<></>
+json
 
 ## Join
-
+Inner join
+Outer join
 
 ## Program
 책 대여점 DB 관리

@@ -1,3 +1,4 @@
+![C# repository!](https://github-readme-stats.vercel.app/api?username=eogusalrns&show_icons=true&theme=cobalt)
 # StudySqlServer
 02-03 오후 4시 시작
 
